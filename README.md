@@ -4,6 +4,10 @@
 
 ![alt text](/planned/appointment_system_planned.png "planned")
 
+# ERD
+
+![alt text](/planned/Appointment%20ERD.png "ERD")
+
 # System Name: 
 
 Appointment System
