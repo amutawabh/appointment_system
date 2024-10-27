@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><title>Appointments</title></head>
+<body>
+    <h2>Appointments</h2>
+    <a href="/appointments/add">Add Appointment</a>
+    <table>
+        <tr><th>Name</th><th>Date</th><th>Phone Number</th><th>Status</th><th>Actions</th></tr>
+        <% appointments.forEach(appointment => { %>
+        <tr>
+            <td><%= appointment.name %></td>
+            <td><%= appointment.datetime %></td>
+            <td><%= appointment.phoneNumber %></td>
+            <td><%= appointment.status %></td>
+            <td>
+                <a href="/appointments/edit/<%= appointment._id %>">Edit</a>
+                <a href="/appointments/delete/<%= appointment._id %>">Delete</a>
+            </td>
+        </tr>
+        <% }) %>
+    </table>
+</body>
+</html>
