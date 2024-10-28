@@ -1,40 +1,49 @@
-// server.js
 const express = require('express');
 const mongoose = require('mongoose');
-const dotenv = require('dotenv');
 const session = require('express-session');
+const MongoStore = require('connect-mongo');
+const bodyParser = require('body-parser');
+const path = require('path');
+require('dotenv').config();
+
+// Routes
+const appointmentRoutes = require('./routes/appointmentRoutes');
+const userRoutes = require('./routes/userRoutes');
+
 const app = express();
+const PORT = process.env.PORT || 3000;
 
-dotenv.config();
+// Database Connection
+mongoose.connect(process.env.MONGODB_URI)
+  .then(() => console.log('Connected to MongoDB'))
+  .catch((err) => console.error('Failed to connect to MongoDB', err));
 
-app.set('view engine', 'ejs');
-app.use(express.urlencoded({ extended: true }));
-app.use(express.static('public'));
-
-// اتصال مع قاعدة البيانات
-mongoose.connect(process.env.MONGO_URI, { useNewUrlParser: true, useUnifiedTopology: true })
-    .then(() => console.log('MongoDB connected'))
-    .catch(err => console.log(err));
-
-// إعداد express-session
+// Session Middleware
 app.use(session({
-    secret: process.env.SESSION_SECRET, // المفتاح السري للجلسة، يجب تعريفه في .env
-    resave: false,
-    saveUninitialized: false,
-    cookie: { secure: false } // اجعلها true إذا كنت تستخدم HTTPS
+  secret: process.env.SESSION_SECRET,
+  resave: false,
+  saveUninitialized: false,
+  store: MongoStore.create({ mongoUrl: process.env.MONGODB_URI })
 }));
 
 // Middleware
-const authMiddleware = require('./middleware/auth');
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(express.static(path.join(__dirname, 'public')));
+
+// View Engine
+app.set('view engine', 'ejs');
+app.set('views', path.join(__dirname, 'views'));
 
 // Routes
-app.use('/appointments', authMiddleware, require('./routes/appointmentRoutes'));
-app.use('/users', require('./routes/userRoutes'));
+app.use('/appointments', appointmentRoutes);
+app.use('/users', userRoutes);
 
-// Login route
-app.get('/', (req, res) => {
-    res.render('login', { error: null }); // تمرير error كـ null بشكل افتراضي
+// Start Server
+app.listen(PORT, () => {
+  console.log(`Server is running on http://localhost:${PORT}`);
 });
 
-const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+// Redirect root route to the login page
+app.get('/', (req, res) => {
+  res.redirect('/users/login');
+});

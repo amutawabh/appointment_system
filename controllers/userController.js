@@ -1,22 +1,26 @@
 const User = require('../models/User');
 const bcrypt = require('bcrypt');
 
-exports.login = async (req, res) => {
-    const { username, password } = req.body;
-    const user = await User.findOne({ username });
-    if (user && await bcrypt.compare(password, user.password)) {
-        req.session.userId = user._id;
-        req.session.role = user.role;
-        res.redirect('/appointments');
-    } else {
-        res.render('login', { error: 'Invalid credentials' });
-    }
+exports.login = (req, res) => {
+  res.render('login');
 };
 
-exports.register = async (req, res) => {
-    const { username, password, role } = req.body;
-    const hashedPassword = await bcrypt.hash(password, 10);
-    const user = new User({ username, password: hashedPassword, role });
-    await user.save();
-    res.redirect('/');
+exports.authenticate = async (req, res) => {
+  const { username, password } = req.body;
+
+  if (!username || !password) {
+    return res.status(400).send('Username and Password are required.');
+  }
+
+  try {
+    const user = await User.findOne({ username });
+    if (user && await bcrypt.compare(password, user.password)) {
+      req.session.userId = user._id;
+      res.redirect('/appointments');
+    } else {
+      res.status(401).send('Invalid username or password');
+    }
+  } catch (error) {
+    res.status(500).send('Error during authentication');
+  }
 };
