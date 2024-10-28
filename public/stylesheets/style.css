@@ -1,28 +1,160 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700');
+
 body {
-    font-family: Arial, sans-serif;
+    font-family: 'Montserrat', sans-serif;
+    display: flex;
+    justify-content: center; 
+    align-items: center; 
+    height: 100vh;
     margin: 0;
-    padding: 0;
-  }
-  
-  .container {
-    width: 80%;
-    margin: auto;
-    overflow: hidden;
-  }
-  
-  header {
-    background: #333;
-    color: #fff;
-    padding: 10px 0;
+    background-color: #f9f7f0;
+}
+
+.landing-header,
+.index-header {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    max-width: 800px; /* Control */
+    padding: 20px;
     text-align: center;
-  }
-  
-  form {
-    margin: 20px 0;
-  }
-  
-  input, button {
+}
+
+.logo-container {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.logo-container h1 {
+    margin: 0;
+    font-size: 1.4em;
+}
+
+.house-icon {
+    width: 1.4em;
+    height: 1.4em;
+    background: url('https://cdn-icons-png.flaticon.com/128/11382/11382524.png') no-repeat center;
+    background-size: contain;
+}
+
+/* __________ URL ______________  */
+.auth-links, .nav-links {
+    display: flex;
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.auth-links a, .nav-links a {
+    color: white;
+    padding: 10px 25px;
+    border-radius: 10px;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.auth-links a:first-child {
+    background-color: #274c9c;
+}
+
+.auth-links a:first-child:hover {
+    background-color: black;
+}
+
+.auth-links a:nth-child(2) {
+    background-color: #6f8dae;
+}
+
+.auth-links a:nth-child(2):hover {
+    background-color: black;
+}
+
+.nav-links a {
+    color: black;
+}
+
+.nav-links a:hover {
+    color: #6f8dae;
+    text-decoration: underline;
+}
+
+/* ___________________    center  ___________________ */ 
+
+.signup-page, .signin-page, .new-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    max-width: 800px;
+    width: 100%;
+    padding: 20px;
+}
+
+.signup-form-container-2, .signin-form-container-2, .new-form-container {
+    padding: 20px;
+    border: 1px solid gray;
+    text-align: center;
+}
+
+.signup-form-container-2 h1, .signin-form-container-2 h1, .new-form-container h1 {
+    font-size: 1.5em;
+    text-transform: uppercase;
+    font-weight: normal;
+}
+
+/* الحقول والأزرار */
+input {
+    border: 1px solid rgb(190, 190, 190);
+    border-radius: 10px;
     padding: 10px;
-    margin: 5px;
-  }
-  
+    width: 100%;
+    max-width: 300px;
+    margin: 10px 0;
+}
+
+button {
+    border: none;
+    border-radius: 8px;
+    background-color: #274c9c;
+    color: white;
+    font-weight: bold;
+    padding: 10px 20px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color: black;
+}
+
+/* بطاقات العرض */
+.card-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 20px;
+    padding: 20px;
+}
+
+.card-container a {
+    padding: 15px;
+    border: 1px solid gray;
+    width: 100%;
+    max-width: 300px;
+    text-decoration: none;
+    color: black;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.card-container a:hover {
+    background-color: black;
+    color: white;
+}
+
+.card-container h4 {
+    font-weight: normal;
+    font-size: 1em;
+}
