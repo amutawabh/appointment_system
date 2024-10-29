@@ -1,51 +1,59 @@
-// 
-
+// server.js
 const express = require('express');
 const mongoose = require('mongoose');
 const session = require('express-session');
 const MongoStore = require('connect-mongo');
-const bodyParser = require('body-parser');
+const dotenv = require('dotenv');
 const path = require('path');
-require('dotenv').config();
 
-// Routes
-const appointmentRoutes = require('./routes/appointmentRoutes');
-const userRoutes = require('./routes/userRoutes');
+// Load environment variables
+dotenv.config();
 
+// Initialize Express app
 const app = express();
-const PORT = process.env.PORT || 3000;
 
-// Database Connection
+// Middleware for parsing request bodies
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
+// Connect to MongoDB
 mongoose.connect(process.env.MONGODB_URI)
-  .then(() => console.log('Connected to MongoDB'))
-  .catch((err) => console.error('Failed to connect to MongoDB', err));
+  .then(() => {
+    console.log('Connected to MongoDB');
+  })
+  .catch((error) => {
+    console.error('Failed to connect to MongoDB:', error);
+  });
 
-// Session Middleware
+// Session middleware configuration
 app.use(session({
   secret: process.env.SESSION_SECRET,
   resave: false,
   saveUninitialized: false,
-  store: MongoStore.create({ mongoUrl: process.env.MONGODB_URI })
+  store: MongoStore.create({ mongoUrl: process.env.MONGODB_URI }),
+  cookie: { maxAge: 1000 * 60 * 60 * 24 } // 1 day
 }));
 
-// Middleware
-app.use(bodyParser.urlencoded({ extended: true }));
-app.use(express.static(path.join(__dirname, 'public')));
-
-// View Engine
+// Set view engine to EJS
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
 
+// Static files
+app.use(express.static(path.join(__dirname, 'public')));
+
 // Routes
+const appointmentRoutes = require('./routes/appointmentRoutes');
+const userRoutes = require('./routes/userRoutes');
 app.use('/appointments', appointmentRoutes);
 app.use('/users', userRoutes);
 
-// Start Server
-app.listen(PORT, () => {
-  console.log(`Server is running on http://localhost:${PORT}`);
-});
-
-// Redirect root route to the login page
+// Home route
 app.get('/', (req, res) => {
   res.redirect('/users/login');
+});
+
+// Start the server
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => {
+  console.log(`Server is running on http://localhost:${PORT}`);
 });

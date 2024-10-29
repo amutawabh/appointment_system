@@ -1,160 +1,105 @@
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700');
-
-body {
-    font-family: 'Montserrat', sans-serif;
-    display: flex;
-    justify-content: center; 
-    align-items: center; 
-    height: 100vh;
+/* Reset styles */
+* {
     margin: 0;
-    background-color: #f9f7f0;
-}
-
-.landing-header,
-.index-header {
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f9;
+    color: #333;
     display: flex;
     flex-direction: column;
+    align-items: center;
     justify-content: center;
-    align-items: center;
+    min-height: 100vh;
+  }
+  
+  h2 {
+    margin-bottom: 20px;
+    color: #333;
+  }
+  
+  form {
+    background: #fff;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    max-width: 400px;
     width: 100%;
-    max-width: 800px; /* Control */
-    padding: 20px;
-    text-align: center;
-}
-
-.logo-container {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-}
-
-.logo-container h1 {
-    margin: 0;
-    font-size: 1.4em;
-}
-
-.house-icon {
-    width: 1.4em;
-    height: 1.4em;
-    background: url('https://cdn-icons-png.flaticon.com/128/11382/11382524.png') no-repeat center;
-    background-size: contain;
-}
-
-/* __________ URL ______________  */
-.auth-links, .nav-links {
-    display: flex;
-    gap: 15px;
-    margin-top: 20px;
-}
-
-.auth-links a, .nav-links a {
-    color: white;
-    padding: 10px 25px;
-    border-radius: 10px;
-    text-decoration: none;
-    font-weight: bold;
-}
-
-.auth-links a:first-child {
-    background-color: #274c9c;
-}
-
-.auth-links a:first-child:hover {
-    background-color: black;
-}
-
-.auth-links a:nth-child(2) {
-    background-color: #6f8dae;
-}
-
-.auth-links a:nth-child(2):hover {
-    background-color: black;
-}
-
-.nav-links a {
-    color: black;
-}
-
-.nav-links a:hover {
-    color: #6f8dae;
-    text-decoration: underline;
-}
-
-/* ___________________    center  ___________________ */ 
-
-.signup-page, .signin-page, .new-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    max-width: 800px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+  }
+  
+  label {
+    display: block;
+    margin-bottom: 5px;
+    color: #555;
+  }
+  
+  input[type="text"],
+  input[type="password"],
+  select {
     width: 100%;
-    padding: 20px;
-}
-
-.signup-form-container-2, .signin-form-container-2, .new-form-container {
-    padding: 20px;
-    border: 1px solid gray;
-    text-align: center;
-}
-
-.signup-form-container-2 h1, .signin-form-container-2 h1, .new-form-container h1 {
-    font-size: 1.5em;
-    text-transform: uppercase;
-    font-weight: normal;
-}
-
-/* الحقول والأزرار */
-input {
-    border: 1px solid rgb(190, 190, 190);
-    border-radius: 10px;
     padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+  }
+  
+  button {
     width: 100%;
-    max-width: 300px;
-    margin: 10px 0;
-}
-
-button {
+    padding: 10px;
+    background-color: #28a745;
+    color: #fff;
     border: none;
-    border-radius: 8px;
-    background-color: #274c9c;
-    color: white;
-    font-weight: bold;
-    padding: 10px 20px;
+    border-radius: 3px;
     cursor: pointer;
-    transition: background-color 0.3s;
-}
-
-button:hover {
-    background-color: black;
-}
-
-/* بطاقات العرض */
-.card-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-    gap: 20px;
-    padding: 20px;
-}
-
-.card-container a {
-    padding: 15px;
-    border: 1px solid gray;
-    width: 100%;
-    max-width: 300px;
+    font-size: 16px;
+  }
+  
+  button:hover {
+    background-color: #218838;
+  }
+  
+  a {
+    color: #007bff;
     text-decoration: none;
-    color: black;
-    transition: background-color 0.3s, color 0.3s;
-}
-
-.card-container a:hover {
-    background-color: black;
-    color: white;
-}
-
-.card-container h4 {
-    font-weight: normal;
-    font-size: 1em;
-}
+  }
+  
+  a:hover {
+    text-decoration: underline;
+  }
+  
+  table {
+    width: 80%;
+    border-collapse: collapse;
+    margin-top: 20px;
+  }
+  
+  table, th, td {
+    border: 1px solid #ddd;
+  }
+  
+  th, td {
+    padding: 10px;
+    text-align: left;
+  }
+  
+  th {
+    background-color: #f4f4f9;
+  }
+  
+  tr:nth-child(even) {
+    background-color: #f9f9f9;
+  }
+  
+  tr:hover {
+    background-color: #f1f1f1;
+  }
+  
+  select {
+    padding: 5px;
+  }
+  

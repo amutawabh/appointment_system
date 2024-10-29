@@ -1,0 +1,39 @@
+<!-- views/userManagement.ejs -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>User Management</title>
+  <link rel="stylesheet" href="/stylesheets/style.css">
+</head>
+<body>
+  <h2>User Management</h2>
+  <a href="/appointments">Back to Appointments</a>
+
+  <!-- Form لإضافة مستخدم جديد -->
+  <h3>Add New User</h3>
+  <form action="/users/create" method="POST">
+    <label for="newUsername">Username:</label>
+    <input type="text" id="newUsername" name="username" required>
+    <br>
+    <label for="newPassword">Password:</label>
+    <input type="password" id="newPassword" name="password" required>
+    <br>
+    <label for="newRole">Role:</label>
+    <select id="newRole" name="role" required>
+      <option value="user">User</option>
+      <option value="admin">Admin</option>
+    </select>
+    <br>
+    <button type="submit">Add User</button>
+  </form>
+
+  <!-- Table لعرض جميع المستخدمين -->
+  <h3>Existing Users</h3>
+  <table>
+    <thead>
+      <tr>
+        <th>Username</th>
+        <th>Role</th>
+        <th>Action

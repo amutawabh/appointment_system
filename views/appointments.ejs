@@ -1,26 +1,51 @@
-<h1>Appointments</h1>
-<a href="/appointments/add">Add Appointment</a>
-<table>
-  <tr>
-    <th>Name</th>
-    <th>Meeting With</th>
-    <th>Date</th>
-    <th>Phone Number</th>
-    <th>Status</th>
-    <th>Actions</th>
-  </tr>
-  <% appointments.forEach(appointment => { %>
-    <tr>
-      <td><%= appointment.name %></td>
-      <td><%= appointment.meetingWith %></td>
-      <td><%= appointment.datetime.toLocaleString() %></td>
-      <td><%= appointment.phoneNumber %></td>
-      <td><%= appointment.status %></td>
-      <td>
-        <form action="/appointments/delete/<%= appointment._id %>" method="POST">
-          <button type="submit">Delete</button>
-        </form>
-      </td>
-    </tr>
-  <% }) %>
-</table>
+<!-- views/appointments.ejs -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Appointments</title>
+  <link rel="stylesheet" href="/stylesheets/style.css">
+</head>
+<body>
+  <h2>Appointments</h2>
+  <a href="/appointments/add">Add Appointment</a>
+  <a href="/users">User Management</a> <!-- يظهر فقط للمشرفين -->
+
+  <table>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Date</th>
+        <th>Time</th>
+        <th>Phone Number</th>
+        <th>Status</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% appointments.forEach(appointment => { %>
+        <tr>
+          <td><%= appointment.name %></td>
+          <td><%= appointment.datetime.toLocaleDateString() %></td>
+          <td><%= appointment.datetime.toLocaleTimeString() %></td>
+          <td><%= appointment.phoneNumber %></td>
+          <td><%= appointment.status %></td>
+          <td>
+            <form action="/appointments/update" method="POST" style="display:inline;">
+              <input type="hidden" name="id" value="<%= appointment._id %>">
+              <select name="status">
+                <option value="Reserved" <%= appointment.status === 'Reserved' ? 'selected' : '' %>>Reserved</option>
+                <option value="Attended" <%= appointment.status === 'Attended' ? 'selected' : '' %>>Attended</option>
+                <option value="Did not attend" <%= appointment.status === 'Did not attend' ? 'selected' : '' %>>Did not attend</option>
+              </select>
+              <button type="submit">Update</button>
+            </form>
+            <a href="/appointments/delete/<%= appointment._id %>">Delete</a>
+          </td>
+        </tr>
+      <% }); %>
+    </tbody>
+  </table>
+</body>
+</html>

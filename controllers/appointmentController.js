@@ -1,35 +1,56 @@
+// controllers/appointmentController.js
 const Appointment = require('../models/Appointment');
 
+// إضافة موعد جديد
+exports.addAppointment = async (req, res) => {
+  const { name, meetingWith, datetime, phoneNumber, status } = req.body;
+
+  try {
+    const newAppointment = new Appointment({
+      name,
+      meetingWith,
+      datetime,
+      phoneNumber,
+      status,
+    });
+
+    await newAppointment.save();
+    res.redirect('/appointments');
+  } catch (error) {
+    res.status(500).send('Server error');
+  }
+};
+
+// الحصول على جميع المواعيد
 exports.getAppointments = async (req, res) => {
   try {
     const appointments = await Appointment.find();
     res.render('appointments', { appointments });
   } catch (error) {
-    res.status(500).send('Error retrieving appointments');
+    res.status(500).send('Server error');
   }
 };
 
-exports.createAppointment = async (req, res) => {
-  const { name, meetingWith, datetime, phoneNumber, status } = req.body;
-
-  if (!name || !meetingWith || !datetime || !phoneNumber) {
-    return res.status(400).send('All fields are required.');
-  }
+// تحديث موعد
+exports.updateAppointment = async (req, res) => {
+  const { id, status } = req.body;
 
   try {
-    const newAppointment = new Appointment({ name, meetingWith, datetime, phoneNumber, status });
-    await newAppointment.save();
+    await Appointment.findByIdAndUpdate(id, { status });
     res.redirect('/appointments');
   } catch (error) {
-    res.status(500).send('Error creating appointment');
+    res.status(500).send('Server error');
   }
 };
 
+// حذف موعد
 exports.deleteAppointment = async (req, res) => {
+  const { id } = req.params;
+
   try {
-    await Appointment.findByIdAndDelete(req.params.id);
+    await Appointment.findByIdAndDelete(id);
     res.redirect('/appointments');
   } catch (error) {
-    res.status(500).send('Error deleting appointment');
+    res.status(500).send('Server error');
   }
 };
