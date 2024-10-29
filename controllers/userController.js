@@ -1,7 +1,6 @@
 // controllers/userController.js
 const User = require('../models/User');
 const bcrypt = require('bcrypt');
-const jwt = require('jsonwebtoken');
 
 // تسجيل الدخول
 exports.login = async (req, res) => {
@@ -50,7 +49,7 @@ exports.createUser = async (req, res) => {
 exports.getUsers = async (req, res) => {
   try {
     const users = await User.find();
-    res.render('userManagement', { users });
+    res.render('userManagement', { users }); // تأكد من تمرير المستخدمين إلى العرض
   } catch (error) {
     res.status(500).send('Server error');
   }
