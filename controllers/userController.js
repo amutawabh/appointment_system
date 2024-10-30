@@ -2,7 +2,8 @@
 const User = require('../models/User');
 const bcrypt = require('bcrypt');
 
-// تسجيل الدخول
+// Login 
+
 exports.login = async (req, res) => {
   const { username, password } = req.body;
 
@@ -26,7 +27,9 @@ exports.login = async (req, res) => {
   }
 };
 
-// إنشاء مستخدم جديد
+// New users
+
+
 exports.createUser = async (req, res) => {
   const { username, password, role } = req.body;
 
@@ -45,7 +48,10 @@ exports.createUser = async (req, res) => {
   }
 };
 
-// الحصول على جميع المستخدمين
+// Show all User 
+// All Users 
+
+
 exports.getUsers = async (req, res) => {
   try {
     const users = await User.find();
@@ -55,7 +61,9 @@ exports.getUsers = async (req, res) => {
   }
 };
 
-// تحديث مستخدم
+// Updated Users 
+
+
 exports.updateUser = async (req, res) => {
   const { id, role } = req.body;
 
@@ -67,7 +75,8 @@ exports.updateUser = async (req, res) => {
   }
 };
 
-// حذف مستخدم
+// Delete users 
+
 exports.deleteUser = async (req, res) => {
   const { id } = req.params;
 

@@ -45,7 +45,9 @@ exports.addAppointment = async (req, res) => {
   }
 };
 
-// الحصول على جميع المواعيد
+// show all appointments
+// appointments all 
+
 exports.getAppointments = async (req, res) => {
   try {
     const appointments = await Appointment.find();
@@ -55,7 +57,9 @@ exports.getAppointments = async (req, res) => {
   }
 };
 
-// حذف موعد
+// Deleted appointments 
+// Delete appointments
+
 exports.deleteAppointment = async (req, res) => {
   const { id } = req.params;
 

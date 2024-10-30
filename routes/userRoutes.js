@@ -4,14 +4,14 @@ const router = express.Router();
 const userController = require('../controllers/userController');
 const auth = require('../middleware/auth');
 
-// Route لتسجيل الدخول
+// Route login
 router.get('/login', (req, res) => {
   res.render('login');
 });
 
 router.post('/login', userController.login);
 
-// Route لإدارة المستخدمين (يتطلب دور Admin)
+// Route admin
 router.get('/', auth.isAdmin, userController.getUsers);
 router.post('/create', auth.isAdmin, userController.createUser);
 router.post('/update', auth.isAdmin, userController.updateUser);

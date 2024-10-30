@@ -1,6 +1,7 @@
 // middleware/auth.js
 
-// التحقق من تسجيل الدخول
+// Confirming login
+
 exports.isAuthenticated = (req, res, next) => {
   if (req.session && req.session.userId) {
     return next();
@@ -9,7 +10,8 @@ exports.isAuthenticated = (req, res, next) => {
   }
 };
 
-// التحقق من صلاحيات المشرف
+// Access 
+
 exports.isAdmin = (req, res, next) => {
   if (req.session && req.session.role === 'admin') {
     return next();

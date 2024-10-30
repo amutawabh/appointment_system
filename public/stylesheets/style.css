@@ -1,4 +1,4 @@
-/* Reset styles */
+
 * {
   margin: 0;
   padding: 0;
@@ -104,7 +104,7 @@ select {
   padding: 5px;
 }
 
-/* تنسيقات الأزرار العامة */
+
 .btn {
   padding: 8px 16px;
   font-size: 14px;
@@ -115,21 +115,21 @@ select {
   color: white;
 }
 
-/* زر التحديث */
+/* Udpated*/
 .btn-update {
-  background-color: #28a745; /* لون أخضر للتحديث */
+  background-color: #28a745; 
   margin-right: 5px;
 }
 
 .btn-update:hover {
-  background-color: #218838; /* لون أغمق عند التمرير */
+  background-color: #218838; 
 }
 
-/* زر الحذف */
+/* Delete*/
 .btn-delete {
-  background-color: #dc3545; /* لون أحمر للحذف */
+  background-color: #dc3545; 
 }
 
 .btn-delete:hover {
-  background-color: #c82333; /* لون أغمق عند التمرير */
+  background-color: #c82333; 
 }

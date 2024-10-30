@@ -4,24 +4,24 @@ const router = express.Router();
 const appointmentController = require('../controllers/appointmentController');
 const auth = require('../middleware/auth');
 
-// Route لعرض صفحة إضافة الموعد الجديد
+// Route add addAppointment links
 router.get('/add', auth.isAuthenticated, (req, res) => {
-  res.render('addAppointment'); // تأكد من وجود ملف addAppointment.ejs في مجلد views
+  res.render('addAppointment'); 
 });
 
-// Route لإضافة موعد جديد (POST)
+// Route (POST)
 router.post('/add', auth.isAuthenticated, appointmentController.addAppointment);
 
-// Route للحصول على جميع المواعيد
+// Route all appointment
 router.get('/', auth.isAuthenticated, appointmentController.getAppointments);
 
-// Route لعرض صفحة تعديل الموعد
+// Route edit
 router.get('/edit/:id', auth.isAuthenticated, appointmentController.editAppointment);
 
-// Route لتحديث الموعد (POST)
+// Route update (POST)
 router.post('/update/:id', auth.isAuthenticated, appointmentController.updateAppointment);
 
-// Route لحذف موعد
+// Route Delete
 router.get('/delete/:id', auth.isAuthenticated, appointmentController.deleteAppointment);
 
 module.exports = router;
