@@ -1,7 +1,7 @@
-// controllers/appointmentController.js
+
 const Appointment = require('../models/Appointment');
 
-// عرض صفحة تعديل الموعد
+//show page edit appointment 
 exports.editAppointment = async (req, res) => {
   try {
     const appointment = await Appointment.findById(req.params.id);
@@ -14,7 +14,7 @@ exports.editAppointment = async (req, res) => {
   }
 };
 
-// تحديث الموعد
+// updated Appontment
 exports.updateAppointment = async (req, res) => {
   const { status } = req.body;
   try {
@@ -25,7 +25,7 @@ exports.updateAppointment = async (req, res) => {
   }
 };
 
-// إضافة موعد جديد
+// add appointment
 exports.addAppointment = async (req, res) => {
   const { name, meetingWith, datetime, phoneNumber, status } = req.body;
 
