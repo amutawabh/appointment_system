@@ -1,0 +1,39 @@
+<!-- views/editAppointment.ejs -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Edit Appointment</title>
+  <link rel="stylesheet" href="/stylesheets/style.css">
+</head>
+<body>
+  <h2>Edit Appointment</h2>
+  <form action="/appointments/update/<%= appointment._id %>" method="POST">
+    <label for="name">Name:</label>
+    <input type="text" id="name" name="name" value="<%= appointment.name %>" readonly>
+    <br>
+    <label for="datetime">Date & Time:</label>
+    <input type="text" id="datetime" name="datetime" value="<%= appointment.datetime.toLocaleString() %>" readonly>
+    <br>
+    <label for="phoneNumber">Phone Number:</label>
+    <input type="text" id="phoneNumber" name="phoneNumber" value="<%= appointment.phoneNumber %>" readonly>
+    <br>
+    <label for="status">Status:</label>
+    <select id="status" name="status" required>
+      <option value="Reserved" <%= appointment.status === 'Reserved' ? 'selected' : '' %>>Reserved</option>
+      <option value="Attended" <%= appointment.status === 'Attended' ? 'selected' : '' %>>Attended</option>
+      <option value="Did not attend" <%= appointment.status === 'Did not attend' ? 'selected' : '' %>>Did not attend</option>
+    </select>
+    <br>
+    <button type="submit" class="btn btn-update">Update Appointment</button>
+  </form>
+
+  <!-- زر الحذف -->
+  <form action="/appointments/delete/<%= appointment._id %>" method="GET" style="margin-top: 10px;">
+    <button type="submit" class="btn btn-delete">Delete Appointment</button>
+  </form>
+
+  <a href="/appointments">Back to Appointments</a>
+</body>
+</html>

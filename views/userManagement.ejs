@@ -43,17 +43,18 @@
       <% users.forEach(user => { %>
         <tr>
           <td><%= user.username %></td>
-          <td><%= user.role %></td>
           <td>
-            <form action="/users/update" method="POST" style="display:inline;">
+            <form action="/users/update" method="POST" style="display:inline-flex; align-items: center;">
               <input type="hidden" name="id" value="<%= user._id %>">
               <select name="role">
                 <option value="user" <%= user.role === 'user' ? 'selected' : '' %>>User</option>
                 <option value="admin" <%= user.role === 'admin' ? 'selected' : '' %>>Admin</option>
               </select>
-              <button type="submit">Update</button>
+              <button type="submit" class="btn btn-update" style="margin-left: 5px;">Update</button>
             </form>
-            <a href="/users/delete/<%= user._id %>">Delete</a>
+          </td>
+          <td>
+            <a href="/users/delete/<%= user._id %>" class="btn btn-delete">Delete</a>
           </td>
         </tr>
       <% }); %>

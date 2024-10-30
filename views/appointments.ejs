@@ -10,12 +10,13 @@
 <body>
   <h2>Appointments</h2>
   <a href="/appointments/add">Add Appointment</a>
-  <a href="/users">User Management</a> <!-- يظهر فقط للمشرفين -->
+  <a href="/users">User Management</a>
 
   <table>
     <thead>
       <tr>
         <th>Name</th>
+        <th>Meeting With</th>
         <th>Date</th>
         <th>Time</th>
         <th>Phone Number</th>
@@ -27,21 +28,14 @@
       <% appointments.forEach(appointment => { %>
         <tr>
           <td><%= appointment.name %></td>
+          <td><%= appointment.meetingWith %></td>
           <td><%= appointment.datetime.toLocaleDateString() %></td>
           <td><%= appointment.datetime.toLocaleTimeString() %></td>
           <td><%= appointment.phoneNumber %></td>
           <td><%= appointment.status %></td>
           <td>
-            <form action="/appointments/update" method="POST" style="display:inline;">
-              <input type="hidden" name="id" value="<%= appointment._id %>">
-              <select name="status">
-                <option value="Reserved" <%= appointment.status === 'Reserved' ? 'selected' : '' %>>Reserved</option>
-                <option value="Attended" <%= appointment.status === 'Attended' ? 'selected' : '' %>>Attended</option>
-                <option value="Did not attend" <%= appointment.status === 'Did not attend' ? 'selected' : '' %>>Did not attend</option>
-              </select>
-              <button type="submit">Update</button>
-            </form>
-            <a href="/appointments/delete/<%= appointment._id %>">Delete</a>
+            <!-- زر Update بداخل الخلية مباشرة بدون أي مسافات إضافية -->
+            <a href="/appointments/edit/<%= appointment._id %>" class="btn btn-update">Update</a>
           </td>
         </tr>
       <% }); %>
