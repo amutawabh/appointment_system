@@ -1,18 +1,14 @@
 // server.js
-const express = require('express');
-const mongoose = require('mongoose');
-const session = require('express-session');
-const MongoStore = require('connect-mongo');
-const dotenv = require('dotenv');
-const path = require('path');
+const express = require('express'); //express
+const mongoose = require('mongoose'); //DB
+const session = require('express-session'); //express
+const MongoStore = require('connect-mongo'); //BD
+const dotenv = require('dotenv'); //.env
+const path = require('path'); // path
+dotenv.config(); //.env
+const app = express(); // express
 
-// Load environment variables
-dotenv.config();
-
-// Initialize Express app
-const app = express();
-
-// Middleware for parsing request bodies
+// Middleware Access
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
@@ -25,7 +21,7 @@ mongoose.connect(process.env.MONGODB_URI)
     console.error('Failed to connect to MongoDB:', error);
   });
 
-// Session middleware configuration
+// middleware configuration
 app.use(session({
   secret: process.env.SESSION_SECRET,
   resave: false,
@@ -34,11 +30,11 @@ app.use(session({
   cookie: { maxAge: 1000 * 60 * 60 * 24 } // 1 day
 }));
 
-// Set view engine to EJS
+// Set view engine to EJS 
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
 
-// Static files
+// CSS Publice
 app.use(express.static(path.join(__dirname, 'public')));
 
 // Routes
@@ -47,12 +43,12 @@ const userRoutes = require('./routes/userRoutes');
 app.use('/appointments', appointmentRoutes);
 app.use('/users', userRoutes);
 
-// Home route
+// Form route Home page is / login page 
 app.get('/', (req, res) => {
   res.redirect('/users/login');
 });
 
-// Start the server
+// runing server port
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
   console.log(`Server is running on http://localhost:${PORT}`);
