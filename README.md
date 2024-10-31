@@ -18,16 +18,10 @@ The system is an appointment booking service. An appointment can be added, modif
 
 # Getting started: 
 
-Git
+https://appointmentsystem-e68be1b85718.herokuapp.com/appointments
 
 # Technologies used: 
 JavaScript, HTML and CSS
 
 # database
 MONGODB 
-
-# Next steps:-
-
-1. 
-2. 
-3.
